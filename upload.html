@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Upload Notes | Study Sutra</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="left">
+                <div class="logo"></div>
+                <div class="brand">Study Sutra</div>
+            </div>
+            <div class="menu" id="menu-toggle">☰</div>
+            <div class="navconnect" id="nav-links">
+                <a href="index.html">Home</a>
+                <a href="topics.html">Topics</a>
+                <a href="resources.html">Resources</a>
+                <a href="portfolio.html">Portfolio</a>
+                <a href="upload.html">Upload Notes</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <button class="toggle-btn" id="dark-mode-toggle">🌙</button>
+        </nav>
+    </header>
+
+    <section class="content">
+        <div class="card">
+            <h2>Upload Your Notes</h2>
+            <form action="upload.php" method="POST" enctype="multipart/form-data">
+                <input type="text" name="title" placeholder="Note Title" required />
+                <input type="file" name="notes" accept=".pdf,.doc,.docx" required />
+                <button type="submit">Upload</button>
+            </form>
+        </div>
+
+        <div class="card">
+            <h2>Available Notes</h2>
+            <ul>
+                <?php
+        $files = scandir("uploads/");
+        foreach ($files as $file) {
+          if ($file !== '.' && $file !== '..') {
+            $title = pathinfo($file, PATHINFO_FILENAME);
+            echo "<li><a href='uploads/$file' target='_blank'>$title</a></li>";
+
+          }
+        }
+      ?>
+            </ul>
+        </div>
+    </section>
+
+
+    <footer>
+        <p>&copy; 2025 Study Sutra. All rights reserved.</p>
+        <h5 class="made">Made by Aayush Sharma in India with Love❤️</h5>
+    </footer>
+</body>
+
+</html>
